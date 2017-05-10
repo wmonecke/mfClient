@@ -1,0 +1,37 @@
+.average {
+  position: absolute;
+  top: -22px;
+  color: rgba(255, 255, 255, 1);
+  left: 5px;
+  font-size: 16px;
+}
+
+.myCanvas {
+  position: absolute;
+  font-size: 16px;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: 1155px;
+  height: 200px;
+  display: block;
+  box-sizing: border-box;
+  overflow: visible;
+
+  canvas {
+    font-size: 16px;
+    overflow: visible;
+  }
+
+  @media (max-width: 1260px) {
+    .myCanvas {
+      margin: auto;
+      width: 1050px !important;
+    }
+
+    canvas {
+      width: 1050px !important;
+    }
+  }
+}

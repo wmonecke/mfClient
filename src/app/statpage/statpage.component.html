@@ -1,0 +1,15 @@
+
+<div class="average">Mood Average: {{ myAverage }}</div>
+
+<div class="myCanvas" style="display: block;">
+  <canvas baseChart
+    [datasets]="lineChartData"
+    [labels]="lineChartLabels"
+    [options]="lineChartOptions"
+    [colors]="lineChartColors"
+    [legend]="lineChartLegend"
+    [chartType]="lineChartType"
+    (chartHover)="chartHovered($event)"
+    (chartClick)="chartClicked($event)">
+  </canvas>
+</div>

@@ -1,0 +1,149 @@
+<!-- EXISTING USER LANDING PAGE ----------------------------------------------->
+
+<!-- BACKGROUND --------------------------------------------------------------->
+<div class="background">
+  <img id="myChangingBackground" src="/assets/images/backgroundtest.jpg" alt="Background Image">
+</div>
+
+<div class="overlay"></div>
+
+<div class="overlayPNG">
+  <img src="/assets/images/overlay-vignette.png" alt="Overlay">
+</div>
+
+<!-- CONTENT OF PAGE ---------------------------------------------------------->
+
+<header>
+  <nav>
+    <ul id="nav">
+      <li class="logo">
+        <img src="/assets/images/moodflow.png" alt="">
+      </li>
+
+      <li class="date signin">
+        {{ today | date:'EEEE dd, MMMM, yyyy' }}
+      </li>
+    </ul>
+  </nav>
+
+  <section class="googleSearch" *ngIf="hasUserSubmitted === true && user.searchbar === true" >
+    <form class="myGoogleSearchForm" ngNoForm method="get" action="https://www.google.com/search">
+      <i id="ion-ios-search-strong" class="ion-ios-search-strong"></i>
+      <input id="placeholder" (click)="injectPlaceholder()" (focusout)="removePlaceholder()" type="text"  name="q">
+    </form>
+  </section>
+
+</header>
+
+<main class="content">
+
+  <section *ngIf="weOnline" class="welcomeMessage">
+
+    <div *ngIf="firstTime.message === 'nomood' " class="addMoodflowAsHomepage">
+      <i (click)="hasSetHomePage()" id="firstTimeClose" class="ion-close-round"></i>
+
+      Dear, {{ user.firstName }}: <br><br>
+      Thank you so much, for giving moodflow a try.<br><br>
+      We hope you enjoy it as much as we do. We want you to know that we are constantly working to improve it.
+      <br><br>
+      Kind regards,<br><br>
+      -  Your moodflow team.
+    </div>
+
+  </section>
+
+
+
+  <div class="darkenBackground" (click)="hasSetHomePage()" *ngIf="firstTime.message === 'nomood' && weOnline"></div>
+
+
+
+  <section class="inputsection" *ngIf="hasUserSubmitted === false && weOnline === true">
+    <h4>
+      <div id="firstGreeting" class="greeting">Good Day, {{ user.firstName }}.</div>
+      <span class="highlight disappear">How is your day going?</span>
+      <div class="highlight second">Do you mind telling why?</div> <br>
+      <span class="forMonth"> - {{ stringMonth }} - </span>
+    </h4>
+
+    <form class="myMoodForm" method="post">
+      <input   class="disappear" on-mouseover="showContinue()" [(ngModel)]="userMood.moodValue" name="inputvalue" type="range" min="0" max="10" step="1">
+
+      <div     class="showInputValue disappear"> {{ userMood.moodValue }} </div>
+      <button  (click)="showCommentInput()" class="continueButton disappear" type="button" name="">&#x21E8; Continue</button>
+
+      <input    id="widerInput" [(ngModel)]="userMood.moodComment" (click)="showSubmitButton()" class="reasonInput second" type="text" name="reason" placeholder=":)" maxlength="140">
+      <div     class="inputInfo second">max. 140 characters</div>
+
+      <button (click)="submitMoodInfo()" (click)="skipped()" class="skip third" type="submit" name="buttonSkip"> &#x2192; Skip</button>
+      <button (click)="submitMoodInfo()" (click)="showStats()" class="submitButton" type="submit" name="buttonFilled">moodflow</button>
+    </form>
+
+    <i id="firstIonClose" class="ion-close-round" (click)="doneReviewing()"></i>
+    <app-statpage id="firstStats" class="alreadySubmittedStats" [isDataTime]="isDataTime"></app-statpage>
+  </section>
+
+
+
+  <section class="alreadySubmitted" *ngIf="hasUserSubmitted === true || weOnline === false" >
+    <h4>
+      <span *ngIf="!weOnline" id="offlineGreeting">Good Day, {{ user.firstName }}.</span>
+      <span *ngIf="weOnline" id="secondGreeting" class="greeting">Good Day, {{ user.firstName }}.</span>
+      <span id="thirdGreeting" class="greeting">Good Day, {{ user2.firstName }}.</span>
+      <span id="secondForMonth" class="forMonth"> - {{ stringMonth }} - </span>
+      <!-- <span class="highlight">Would you like to...</span> -->
+      <!-- <span id="secondWouldYou" class="highlight">Would you like to...</span> -->
+    </h4>
+
+    <div class="buttonsContainer" *ngIf="weOnline === true">
+      <button id="meditateButton" (click)="startMeditation()" data-balloon-length="medium" data-balloon="...and reduce stress & anxiety in a 5 min. session" data-balloon-pos="down" type="button" name="button">Meditate</button>
+      <button id="reflectButton" (click)="showMood()" data-balloon-length="medium" data-balloon="...and get insight into what really makes you happy :)" data-balloon-pos="down" type="button" name="button">Reflect</button>
+      <button id="motivateButton" (click)="startMotivation()" data-balloon-length="medium" data-balloon="...and get your daily dose of inspiration." data-balloon-pos="down" type="button" name="button">Motivate</button>
+    </div>
+
+
+    <i id="iconClose" class="ion-close-round" (click)="doneReflecting()"></i>
+    <app-statpage id="reflectMood" class="alreadySubmittedStats" [isDataTime]="isDataTime"> </app-statpage>
+
+
+    <div class="letsStart"> Great! Let's Start... </div>
+  </section>
+
+</main>
+
+
+
+
+<div (click)="closeIframe()" id="closeiframe" class="closeiframe"></div>
+<iframe class="myiframe" width="850" volume="50" height="455" src="" frameborder="1" allowfullscreen></iframe>
+
+
+
+<!-- FOOTER OF PAGE ---------------------------------------------------------->
+
+<footer>
+  <section class="picCredit">
+    <p id="picLocation"></p>
+    <p id="picAuthor"></p>
+  </section>
+
+  <!-- <section class="quotesection"> -->
+    <!-- <blockquote id="random_quote" on-mouseover='hover()'></blockquote>
+
+    <p class="quoter" id="random_quoter"></p>
+  </section> -->
+
+  <div class="logoutpopup" (mouseleave)="logoutFadeOut()">
+  <!-- <label for="quotes">Quotes:&nbsp;</label>
+  <input id="quotes" checked type="checkbox" name="quotes" value=""> <br> -->
+    <label class="move" for="searchbar">Searchbar:&nbsp;</label>
+    <input class="move" (click)="noSearchbar()" id="searchbar" type="checkbox" checked name="searchbar" value=""> <br>
+    <label class="move logoutbutton" (click)=logout()>Log Out</label>
+  </div>
+  <i class="ion-gear-a" (click)="logoutFadeIn()"></i>
+</footer>
+
+<!-- MEDITATION BLACK CURTAIN -->
+<div id="parent" class="container">
+  <div id="child" class="hello"></div>
+</div>

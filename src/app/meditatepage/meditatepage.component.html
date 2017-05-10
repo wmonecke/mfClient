@@ -1,0 +1,43 @@
+<main>
+
+  <i class="ion-close-round" (click)="backHome();"></i>
+
+  <span *ngIf="this.hasMeditatedBefore.hasEverMeditated === false" class="typedjs typed typed-fade-out"></span>
+  <div *ngIf="this.hasMeditatedBefore.hasEverMeditated" id="typedTwo" class="typedjs">Welcome back, {{ user.firstName }} <br/> Let us start. </div>
+
+
+  <div class="target">
+    <div class="scaleAnimation">
+      <div class="bounceAnimation">
+        <div class="center"></div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="container">
+
+
+    <h2> Well done.</h2>
+
+  </div>
+
+
+
+
+  <section class="haltStressSection">
+
+    <span class="introMessageStress typed-fade-outs"></span>
+
+    <div class="thingsToDo">
+
+    </div>
+  </section>
+
+
+
+
+  <div class="warning">Meditation is best experienced with headphones.</div>
+  <div class="sponsor"> Music: http://www.bensound.com </div>
+</main>

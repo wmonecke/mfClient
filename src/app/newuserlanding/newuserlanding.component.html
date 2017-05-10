@@ -1,0 +1,142 @@
+<!-- NEW USER LANDING PAGE ---------------------------------------------------->
+
+<!-- BACKGROUND --------------------------------------------------------------->
+<div class="background">
+  <video id="myVideo" src="/assets/videos/moodflowbg.mp4" autoplay loop="true"></video>
+</div>
+
+<div class="overlay"></div>
+
+<!-- NEW USER LANDING PAGE ---------------------------------------------------->
+<header>
+  <nav>
+    <ul id="nav">
+      <li class="logo">
+        <img src="/assets/images/moodflow.png" alt="">
+      </li>
+      <li class="navright signin" (click)="loginpopup()">Sign In</li>
+      <li class="navright signup" (click)="popup()">Sign Up</li>
+    </ul>
+  </nav>
+</header>
+
+<!-- MAIN CONTENT OF NEW USER LANDING PAGE ------------------------------------>
+<main>
+
+  <div class="notification" *ngIf="error"> {{ error._body }} </div>
+
+  <h1 id="title">
+    <span class="h1right">Take care of
+        <div class="slidingVertical">
+          <span>yourself.</span>
+          <span>your mind.</span>
+          <span>your mood.</span>
+          <span>your happiness.</span>
+          <span>your mind.</span>
+        </div>
+      </span><br>
+    <span class="h1left">Control your <span class="highlight">moodflow</span></span>
+  </h1>
+
+  <a href="#" id="titlebutton" (click)="popup()"> Flow </a>
+  <i (click)="scrollDown()" class="ion-ios-arrow-down"></i>
+</main>
+
+<!-- POPUP CONTENT: ONLY VISIBLE WHEN CLICKING SIGN UP OR FLOW -->
+<div class="popupbg">
+
+
+  <div class="popup">
+    <span class="closepopup" (click)="closepopup()">&#x2613;</span>
+
+
+    <h4>
+      Let's get you set up real quick:
+    </h4>
+
+
+      <form class="localForm" method="post">
+        <label for="firstName">first name</label> <br>
+        <input [(ngModel)]='signupInfo.firstName' id="firstName" type="text" name="firstName"><br><br>
+
+        <label for="lastName">last name</label> <br>
+        <input [(ngModel)]='signupInfo.lastName' type="text" name="lastName"><br><br>
+
+        <label for="username">username</label> <br>
+        <input [(ngModel)]='signupInfo.username' id="username" type="text" name="username"><br><br>
+
+        <label for="password">password</label> <br>
+        <input [(ngModel)]='signupInfo.password' id="password" type="password" name="password"><br><br>
+        <div class="passwordInfo">- at least 6 characters long.</div>
+
+        <label for="gender">I'm a:</label><br>
+
+        <label class="checkboxes" for="guy">Guy </label>
+        <input class="guycheckbox" (click)="guy()" id="guy" type="checkbox" name="guy" value=""> <br>
+
+        <label class="girlcheckbox checkboxes" for="girl">Girl</label>
+        <input id="girl" (click)="girl()" type="checkbox" name="girl" value=""><br>
+
+        <button (click)='signup()' type="submit" name="button">Ready!</button>
+      </form>
+
+      <h3>OR</h3>
+
+      <div class="rightContainer">
+        <div class="triggerFbButton" (click)="loginWithFacebook()"> </div>
+        <div class="fb-login-button" data-width="152px" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
+      </div>
+  </div>
+
+</div>
+
+<!-- POPUP CONTENT: ONLY VISIBLE WHEN CLICKING SIGN IN -->
+<section class="loginpopup">
+
+  <form method="post">
+
+    <label class="loginlabel" for="username">Username:</label> <br>
+    <input [(ngModel)]="loginInfo.username" id="username" type="text" name="username"><br><br><br>
+
+    <label class="loginlabel" for="password">Password:</label> <br>
+    <input [(ngModel)]="loginInfo.password" id="password" type="password" name="password"><br><br>
+
+    <button (click)="login()" type="button" name="button">Log In</button>
+  </form>
+
+
+</section>
+<!-- ABOUT SECTION ------------------------------------------------------------>
+<section class="howitworks">
+
+  <div class="boxes boxOne">
+    <h3>1. Rate the Day</h3>
+    <br>
+    <p>
+       Simply give your day a rating <br>
+       from one to ten.
+    </p>
+  </div>
+
+  <div class="boxes boxTwo">
+    <h3>2. Add a Comment</h3>
+    <br>
+    <p>
+       Add a comment to support  <br>
+       your rating (if you want).
+    </p>
+    <h2>...and let the mood flow.</h2>
+  </div>
+
+  <div class="boxes boxThree">
+    <h3>3. Reflect</h3>
+    <br>
+    <p>
+       Use the data provided by yourself <br>
+       to review and reflect on the things <br>
+       that really make you happy.
+    </p>
+    <i (click)="scrollAllTop()" class="ion-ios-arrow-up"></i>
+  </div>
+
+</section>
